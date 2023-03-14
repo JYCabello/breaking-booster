@@ -11,6 +11,13 @@ export class AdditionFollowup {
       return;
     }
     const entity = await Booster.entity(Addition, event.entityID()) as Addition;
-    register.events(new Added(entity.id, remainder));
+    if (remainder % 2 === 0) {
+      register.events(
+        new Added(entity.id, remainder / 2),
+        new Added(entity.id, remainder / 2)
+      );
+    } else {
+      register.events(new Added(entity.id, remainder));
+    }
   }
 }
